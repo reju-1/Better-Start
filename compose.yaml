@@ -1,0 +1,9 @@
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/app/src # Mount source code for live reload
+    env_file: .env
