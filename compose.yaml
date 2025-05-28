@@ -1,40 +1,41 @@
-# version: "3.9"
-
 services:
   app:
-    # BackEnd
+    # BackEnd Service
     build:
       context: .
     container_name: app-container
     restart: always
     ports:
       - "8000:8000"
-    env_file: .env
+    env_file:
+      - .env
     depends_on:
       - mysql
     volumes:
-      - ./src:/app/src # Sync the code folder (host) to container
+      - ./src:/app/src
+    networks:
+      - backend
 
   mysql:
-    # DataBase
+    # MySQL Database Service
     image: mysql:8.3
-    container_name: mysql-db
     restart: always
+    ports:
+      - "3306:3306"
     environment:
-      # Mysql Credentials
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
       MYSQL_PASSWORD: 1234
       MYSQL_DATABASE: new_db
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-    logging:
-      driver: "none" # disables logging
+    # logging:
+    #   driver: "none"
+    networks:
+      - backend
 
   adminer:
-    # Database UI
+    # Adminer UI for DB
     image: adminer
     container_name: adminer
     restart: always
@@ -42,10 +43,15 @@ services:
       - "8080:8080"
     depends_on:
       - mysql
-    logging:
-      driver: "none" # disables logging
+    # logging:
+    #   driver: "none"
+    networks:
+      - backend
 
 volumes:
   mysql_data:
 
 
+networks:
+  backend:
+    driver: bridge
