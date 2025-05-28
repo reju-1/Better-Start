@@ -7,6 +7,9 @@ class Settings(BaseSettings):
     version: str = "1.0.0"
     api_prefix: str = "/api/v1"
 
+    # ========= API keys ========
+    open_ai: str
+
     # ========= Database =========
     database_url: str
 
