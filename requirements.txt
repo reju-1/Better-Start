@@ -8,6 +8,11 @@ sqlmodel
 pydantic
 pydantic-settings
 
+# ======== Security ==========
+Authlib
+passlib[bcrypt]
+
+
 # ======== AI ===========
 openai
 langchain
