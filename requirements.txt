@@ -3,27 +3,15 @@ fastapi
 uvicorn
 httpx
 
-pymysql
 sqlmodel
 pydantic
 pydantic-settings
 
+
 # ======== Security ==========
-Authlib
+PyJWT
 passlib[bcrypt]
 
 
 # ======== AI ===========
 openai
-langchain
-
-langchain 
-langchain-community 
-openai 
-faiss-cpu
-tiktoken
-
-pypdf
-
-sentence-transformers
-huggingface-hub
