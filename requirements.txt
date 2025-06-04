@@ -4,7 +4,7 @@ uvicorn
 httpx
 
 sqlmodel
-pydantic
+pydantic[email,timezone]
 pydantic-settings
 
 
