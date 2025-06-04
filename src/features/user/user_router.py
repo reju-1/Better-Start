@@ -4,19 +4,23 @@ from sqlmodel import Session
 
 # Internal imports
 from src.core.db import get_session
-from src.models import user_models
-from . import user_response_schema
-from . import user_controller
+from . import user_schemas as schema
+from . import user_controller as controller
 
 
 DBSession = Annotated[Session, Depends(get_session)]
 router = APIRouter(prefix="/users")
 
 
+@router.get("/login", response_model=schema.LoginResponse)
+def login_handler(user_data: schema.LoginData, session: DBSession):
+    return controller.handle_login(user_data, session)
+
+
 @router.post(
     "/signup",
-    response_model=user_response_schema.UserCreate,
+    response_model=schema.SignupResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def signup(user_data: user_models.User, session: DBSession):
-    return user_controller.handle_signup(user_data, session)
+def signup_handler(user_data: schema.SignupData, session: DBSession):
+    return controller.handle_signup(user_data, session)
