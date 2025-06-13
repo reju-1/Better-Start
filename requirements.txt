@@ -16,4 +16,4 @@ passlib[bcrypt]
 # ======== AI ===========
 openai
 pika
-
+aio_pika
